@@ -3,3 +3,6 @@
 config.json
 
 node_modules/
+
+#apple file finder access file (don't need)
+.DS_Store
