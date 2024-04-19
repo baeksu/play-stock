@@ -18,6 +18,8 @@ fs.readFile(filePath, "utf-8", (err, data) => {
     appSecret = configData.APPSECRET;
 });
 
+//TODO : 접근토큰발급을 위한 get 요청
+
 //접근토큰발급을 위한 request header
 const accessAuthorizationRequestHeader = {
     grant_type: "client_credentials",
