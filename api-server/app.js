@@ -6,14 +6,10 @@ const filePath = "../config.json"; //config file 경로
 //어차피 app.js 에서는 configData 를 직접 접근할 일은 없을 듯
 const configData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-dailyCreateOauthData(); //주기적으로 oauth 요청
-
-function dailyCreateOauthData() {
-    setInterval(fetchOauthData, 5000);
-}
+dailyFetchOauthData(); //주기적으로 oauth 요청
 
 //하루에 한번씩 oauth 데이터를 가져와야 한다.
-function fetchOauthData() {
+function dailyFetchOauthData() {
     //접근토큰발급을 위한 request header
     const accessAuthorizationRequestBody = {
         grant_type: "client_credentials",
@@ -32,4 +28,6 @@ function fetchOauthData() {
             //요청 실패
             console.log(err);
         });
+
+    setInterval(fetchOauthData, 86400000);
 }
