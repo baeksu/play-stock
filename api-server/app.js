@@ -8,6 +8,8 @@ const configData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
 dailyFetchOauthData(); //주기적으로 oauth 요청
 
+//TODO : Controller.js 에서 컨트롤러 작성후에 여기다가 실행하자
+
 //하루에 한번씩 oauth 데이터를 가져와야 한다.
 function dailyFetchOauthData() {
     //접근토큰발급을 위한 request header
@@ -22,12 +24,13 @@ function dailyFetchOauthData() {
         .post(OAuthRequestUrl, accessAuthorizationRequestBody)
         .then((res) => {
             //요청 성공
-            console.log(res.data);
+            const oauth = res.data;
+            module.exports.oauth = oauth;
         })
         .catch((err) => {
             //요청 실패
             console.log(err);
         });
 
-    setInterval(fetchOauthData, 86400000);
+    setInterval(dailyFetchOauthData, 86400000);
 }
